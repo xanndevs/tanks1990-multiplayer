@@ -72,6 +72,9 @@ endif
 clean:
 	rm -rf $(BUILD)
 	rm -rf doc
+	 
+
+
 
 doc:
 	doxywizard Doxyfile

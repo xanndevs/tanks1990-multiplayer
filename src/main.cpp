@@ -7,11 +7,11 @@
  * \version 1.0
  * \par Kontakt:
  * \a k.kaluzny141@gmail.com
-*/
+ */
 
 #include "app.h"
 
-int main( int argc, char* args[] )
+int main(int argc, char *args[])
 {
     App app;
     app.run();

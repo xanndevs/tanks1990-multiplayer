@@ -21,7 +21,8 @@ Bullet::Bullet(double x, double y)
 
 void Bullet::update(Uint32 dt)
 {
-    if(!collide)
+
+    if (!collide)
     {
         switch (direction)
         {
@@ -41,17 +42,21 @@ void Bullet::update(Uint32 dt)
 
         src_rect = moveRect(m_sprite->rect, direction, 0);
         Object::update(dt);
+        Object::collision_rect.x = pos_x + 2;
+        Object::collision_rect.y = pos_y + 2;
+        Object::collision_rect.h = 4;
+        Object::collision_rect.w = 4;
     }
     else
     {
-        if(m_sprite->frames_count > 1)
+        if (m_sprite->frames_count > 1)
         {
             m_frame_display_time += dt;
-            if(m_frame_display_time > m_sprite->frame_duration)
+            if (m_frame_display_time > m_sprite->frame_duration)
             {
                 m_frame_display_time = 0;
                 m_current_frame++;
-                if(m_current_frame >= m_sprite->frames_count)
+                if (m_current_frame >= m_sprite->frames_count)
                     to_erase = true;
 
                 src_rect = moveRect(m_sprite->rect, 0, m_current_frame);
@@ -62,7 +67,8 @@ void Bullet::update(Uint32 dt)
 
 void Bullet::destroy()
 {
-    if(collide) return; //zapogiega wielogrotnmu wywołaniu
+    if (collide)
+        return; // zapogiega wielogrotnmu wywołaniu
 
     collide = true;
     speed = 0;
@@ -70,7 +76,7 @@ void Bullet::destroy()
     m_frame_display_time = 0;
     m_sprite = Engine::getEngine().getSpriteConfig()->getSpriteData(ST_DESTROY_BULLET);
 
-    switch(direction)
+    switch (direction)
     {
     case D_UP:
         dest_rect.x = pos_x + (dest_rect.w - m_sprite->rect.w) / 2; // dest_rect.w, dest_rect.h - stary rozmiar pocisku
@@ -97,5 +103,4 @@ void Bullet::destroy()
     src_rect.y = m_sprite->rect.y;
     src_rect.h = m_sprite->rect.h;
     src_rect.w = m_sprite->rect.w;
-
 }

@@ -9,14 +9,13 @@
 class Player : public Tank
 {
 public:
-
     /**
      * @brief Struktura przechowująca klawiszę odpowiadające sterowaniem czołgiem gracza.
      */
     struct PlayerKeys
     {
-        PlayerKeys(): up(SDL_SCANCODE_UNKNOWN), down(SDL_SCANCODE_UNKNOWN), left(SDL_SCANCODE_UNKNOWN), right(SDL_SCANCODE_UNKNOWN), fire(SDL_SCANCODE_UNKNOWN) {}
-        PlayerKeys(SDL_Scancode u, SDL_Scancode d, SDL_Scancode l, SDL_Scancode r, SDL_Scancode f): up(u), down(d), left(l), right(r), fire(f) {}
+        PlayerKeys() : up(SDL_SCANCODE_UNKNOWN), down(SDL_SCANCODE_UNKNOWN), left(SDL_SCANCODE_UNKNOWN), right(SDL_SCANCODE_UNKNOWN), fire(SDL_SCANCODE_UNKNOWN) {}
+        PlayerKeys(SDL_Scancode u, SDL_Scancode d, SDL_Scancode l, SDL_Scancode r, SDL_Scancode f) : up(u), down(d), left(l), right(r), fire(f) {}
         /**
          * Klawisz odpowiadający jeździe w górę.
          */
@@ -52,7 +51,6 @@ public:
      */
     Player(double x, double y, SpriteType type);
 
-
     /**
      * Funkcaj odpowiada za zmianę animacji czołgu gracza oraz za sprawdzeni stanu wciśniętych klawiszy i reakcja na te klawisze, które sterują czołgiem gracza.
      * @param dt - czas od ostatwniego wywołania funkcji, wykorzystywany przy zmianie animacji
@@ -71,7 +69,7 @@ public:
      * nadaniu mu większej szybkości jeżeli gracz ma przynajmniej jedną gwiazdkę oraz dodaniu zwiększonych obrażeni jeżeli gracz ma trzy gwiazdki.
      * @return wskaźnik na utworzony pocisk, jeżeli nie stworzono pocisku zwraca @a nullptr
      */
-    Bullet* fire();
+    Bullet *fire();
 
     /**
      * Funkcja zmienia liczbę aktualnie posiadanych gwiazdek. Przy niezerowej liczbie gwiazdek zwiększana jest domyślna prędkość czołgu,

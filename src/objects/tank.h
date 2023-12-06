@@ -45,7 +45,7 @@ public:
      * Funkcja odpowiada za stworzenie pocisku jeżeli jeszcze nie stworzono maksymalnej ich ilości.
      * @return wskaźnik na utworzony pocisk, jeżeli nie stworzono pocisku zwraca @a nullptr
      */
-    virtual Bullet* fire();
+    virtual Bullet *fire();
     /**
      * Funkcja zwraca prostokąt kolizji jaki byłby w następnej klatce przy założeniu prędkości i kierunku takiej jaka jest obecnie.
      * @param dt - przewidywany czas wyliczania następnej klatki
@@ -106,7 +106,7 @@ public:
     /**
      * Kontener z wystrzelonymi pociskami czołgu.
      */
-    std::vector<Bullet*> bullets;
+    std::vector<Bullet *> bullets;
     /**
      * Liczba żyć gracza lub numer poziomu pancerza wrogiego czołgu.
      */
@@ -133,11 +133,11 @@ protected:
     /**
      * Wskaźnik na osłonkę czołgu. Jeśli czołg nie ma osłonki zmienna ma wartośc nullptr;
      */
-    Object* m_shield;
+    Object *m_shield;
     /**
      * Wskaźnik na łódkę, którą może mieć czołg. Jeśli czołg nie ma łódki zmienna ma wartośc nullptr;
      */
-    Object* m_boat;
+    Object *m_boat;
     /**
      * Czas od zdobycia osłonki.
      */

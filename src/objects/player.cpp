@@ -19,14 +19,14 @@ Player::Player()
 Player::Player(double x, double y, SpriteType type)
     : Tank(x, y, type)
 {
-   speed = 0;
-   lives_count = 11;
-   m_bullet_max_size = AppConfig::player_bullet_max_size;
-   score = 0;
-   star_count = 0;
-   m_shield = new Object(x, y, ST_SHIELD);
-   m_shield_time = 0;
-   respawn();
+    speed = 0;
+    lives_count = 11;
+    m_bullet_max_size = AppConfig::player_bullet_max_size;
+    score = 0;
+    star_count = 0;
+    m_shield = new Object(x, y, ST_SHIELD);
+    m_shield_time = 0;
+    respawn();
 }
 
 void Player::update(Uint32 dt)
@@ -35,35 +35,34 @@ void Player::update(Uint32 dt)
 
     Tank::update(dt);
 
-    if(key_state != nullptr && !testFlag(TSF_MENU))
+    if (key_state != nullptr && !testFlag(TSF_MENU))
     {
-        if(key_state[player_keys.up])
+        if (key_state[player_keys.up])
         {
             setDirection(D_UP);
             speed = default_speed;
         }
-        else if(key_state[player_keys.down])
+        else if (key_state[player_keys.down])
         {
             setDirection(D_DOWN);
             speed = default_speed;
         }
-        else if(key_state[player_keys.left])
+        else if (key_state[player_keys.left])
         {
             setDirection(D_LEFT);
             speed = default_speed;
         }
-        else if(key_state[player_keys.right])
+        else if (key_state[player_keys.right])
         {
             setDirection(D_RIGHT);
             speed = default_speed;
         }
         else
         {
-            if(!testFlag(TSF_ON_ICE) || m_slip_time == 0)
+            if (!testFlag(TSF_ON_ICE) || m_slip_time == 0)
                 speed = 0.0;
         }
-
-        if(key_state[player_keys.fire] && m_fire_time > AppConfig::player_reload_time)
+        if (key_state[player_keys.fire] && m_fire_time > AppConfig::player_reload_time)
         {
             fire();
             m_fire_time = 0;
@@ -71,8 +70,7 @@ void Player::update(Uint32 dt)
     }
 
     m_fire_time += dt;
-
-    if(testFlag(TSF_LIFE))
+    if (testFlag(TSF_LIFE))
         src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction), m_current_frame + 2 * star_count);
     else
         src_rect = moveRect(m_sprite->rect, 0, m_current_frame + 2 * star_count);
@@ -83,13 +81,14 @@ void Player::update(Uint32 dt)
 void Player::respawn()
 {
     lives_count--;
-    if(lives_count <= 0)
+    if (lives_count <= 0)
     {
-        if(bullets.size() == 0) to_erase = true;
+        if (bullets.size() == 0)
+            to_erase = true;
         return;
     }
 
-    if(type == ST_PLAYER_1)
+    if (type == ST_PLAYER_1)
     {
         pos_x = AppConfig::player_starting_point.at(0).x;
         pos_y = AppConfig::player_starting_point.at(0).y;
@@ -113,14 +112,15 @@ void Player::respawn()
 
 void Player::destroy()
 {
-    if(testFlag(TSF_SHIELD)) return;
-    if(testFlag(TSF_BOAT))
+    if (testFlag(TSF_SHIELD))
+        return;
+    if (testFlag(TSF_BOAT))
     {
         clearFlag(TSF_BOAT);
         return;
     }
 
-    if(star_count == 3)
+    if (star_count == 3)
         changeStarCountBy(-1);
     else
     {
@@ -129,13 +129,15 @@ void Player::destroy()
     }
 }
 
-Bullet* Player::fire()
+Bullet *Player::fire()
 {
-    Bullet* b = Tank::fire();
-    if(b != nullptr)
+    Bullet *b = Tank::fire();
+    if (b != nullptr)
     {
-        if(star_count > 0) b->speed = AppConfig::bullet_default_speed * 1.3;
-        if(star_count == 3) b->increased_damage = true;
+        if (star_count > 0)
+            b->speed = AppConfig::bullet_default_speed * 1.3;
+        if (star_count == 3)
+            b->increased_damage = true;
     }
     return b;
 }
@@ -143,12 +145,18 @@ Bullet* Player::fire()
 void Player::changeStarCountBy(int c)
 {
     star_count += c;
-    if(star_count > 3) star_count = 3;
-    else if(star_count < 0) star_count = 0;
+    if (star_count > 3)
+        star_count = 3;
+    else if (star_count < 0)
+        star_count = 0;
 
-    if(star_count >= 2 && c > 0) m_bullet_max_size++;
-    else m_bullet_max_size = 2;
+    if (star_count >= 2 && c > 0)
+        m_bullet_max_size++;
+    else
+        m_bullet_max_size = 1;
 
-    if(star_count > 0) default_speed = AppConfig::tank_default_speed * 1.3;
-    else default_speed = AppConfig::tank_default_speed;
+    if (star_count > 0)
+        default_speed = AppConfig::tank_default_speed * 1.3;
+    else
+        default_speed = AppConfig::tank_default_speed;
 }

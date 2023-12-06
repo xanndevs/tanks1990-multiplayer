@@ -73,6 +73,10 @@ private:
      * Czas po jakim nastąpi próba kolejnego wystrzału.
      */
     Uint32 m_reload_time;
+    /**
+     * Checks if the enemy is bonus and if yes it starts flickering
+     */
+    Uint32 m_bonus_time;
 };
 
 #endif // ENEMY_H
